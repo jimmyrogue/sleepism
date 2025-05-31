@@ -62,7 +62,7 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -81,12 +81,14 @@
 }
 
 @keyframes float {
-  0%,
-  100% {
+  0% {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-4px);
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }
 
@@ -100,17 +102,36 @@
   }
 }
 
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
 /* Logo animation classes */
 .animate-breathe {
   animation: breathe 4s ease-in-out infinite;
 }
 
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
 }
 
 .animate-gentle-breathe {
   animation: gentleBreathe 3.5s ease-in-out infinite;
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
 }
 
 /* Combined animation for the main logo */
@@ -119,10 +140,18 @@
 }
 
 .animate-fade-in {
-  animation: fadeIn 1.5s ease-out forwards;
+  animation: fadeIn 1s ease-out;
 }
 
 /* Chinese text styling */
 .font-chinese {
   font-family: var(--font-noto-sans-sc), system-ui, -apple-system, sans-serif;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
 }
