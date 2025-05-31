@@ -1,0 +1,32 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Project Structure Guide
+
+This is a Next.js 15 project with TypeScript and Tailwind CSS, using the App Router pattern.
+
+## Key Directories
+- `app/`: Contains the main application routes and layouts
+  - [layout.tsx](mdc:app/layout.tsx): Root layout component
+  - [page.tsx](mdc:app/page.tsx): Home page component
+  - [globals.css](mdc:app/globals.css): Global styles
+
+- `components/`: Reusable UI components
+  - [ui/](mdc:components/ui): Shadcn UI components
+  - [language-toggle.tsx](mdc:components/language-toggle.tsx): Language switcher
+  - [logo.tsx](mdc:components/logo.tsx): Application logo
+  - [theme-provider.tsx](mdc:components/theme-provider.tsx): Theme context provider
+
+- `contexts/`: React context providers
+- `hooks/`: Custom React hooks
+- `lib/`: Utility functions and shared code
+- `public/`: Static assets
+- `styles/`: Additional styling files
+
+## Configuration Files
+- [package.json](mdc:package.json): Project dependencies and scripts
+- [tailwind.config.ts](mdc:tailwind.config.ts): Tailwind CSS configuration
+- [tsconfig.json](mdc:tsconfig.json): TypeScript configuration
+- [next.config.mjs](mdc:next.config.mjs): Next.js configuration

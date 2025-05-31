@@ -1,0 +1,48 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# UI Components Guide
+
+This project uses Shadcn UI components built on top of Radix UI primitives, with Tailwind CSS for styling.
+
+## Component Library
+The project uses the following UI component libraries:
+- Radix UI primitives for accessible components
+- Shadcn UI for styled components
+- Lucide React for icons
+- Tailwind CSS for styling
+
+## Key UI Components
+- [language-toggle.tsx](mdc:components/language-toggle.tsx): Language switching component
+- [logo.tsx](mdc:components/logo.tsx): Application logo component
+- [theme-provider.tsx](mdc:components/theme-provider.tsx): Dark/light theme provider
+
+## Styling
+- Global styles are defined in [globals.css](mdc:app/globals.css)
+- Tailwind configuration in [tailwind.config.ts](mdc:tailwind.config.ts)
+- Uses `class-variance-authority` for component variants
+- Implements dark mode through `next-themes`
+
+## Available Radix UI Components
+The project includes the following Radix UI components:
+- Accordion
+- Alert Dialog
+- Avatar
+- Checkbox
+- Dialog
+- Dropdown Menu
+- Navigation Menu
+- Popover
+- Select
+- Tabs
+- Toast
+- Tooltip
+- And more...
+
+## Usage Guidelines
+1. Use Shadcn UI components from the `components/ui` directory
+2. Follow the established styling patterns using Tailwind CSS
+3. Implement dark mode support using the theme provider
+4. Ensure all components are accessible using Radix UI primitives

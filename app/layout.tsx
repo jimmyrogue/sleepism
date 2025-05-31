@@ -1,0 +1,35 @@
+import type React from "react"
+import "@/app/globals.css"
+import { Inter, Noto_Sans_SC } from "next/font/google"
+import { ThemeProvider } from "@/components/theme-provider"
+import { LanguageProvider } from "@/contexts/language-context"
+
+const inter = Inter({ subsets: ["latin"] })
+const notoSansSC = Noto_Sans_SC({
+  subsets: ["latin"],
+  variable: "--font-noto-sans-sc",
+  display: "swap",
+})
+
+export const metadata = {
+  title: "睡教 · The Sleepism",
+  description:
+    "Sleep is sacred. We believe that sleep is a form of healing, reflection, and connection with the inner self.",
+    generator: 'v0.dev'
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} ${notoSansSC.variable} antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
+          <LanguageProvider>{children}</LanguageProvider>
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
