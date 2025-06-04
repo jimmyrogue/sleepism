@@ -155,3 +155,18 @@
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+@keyframes riseAndFade {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.animate-rise-fade {
+  animation: riseAndFade 0.8s ease-out forwards;
+}

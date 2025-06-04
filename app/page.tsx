@@ -2,10 +2,26 @@
 import { useLanguage } from "@/contexts/language-context";
 import { LanguageToggle } from "@/components/language-toggle";
 import { Logo } from "@/components/logo";
-import { FC } from "react";
+import { Button } from "@/components/ui/button";
+import { FC, useState, useEffect } from "react";
 
 const Home: FC = () => {
   const { t, language } = useLanguage();
+  const [count, setCount] = useState(0);
+  const [showPlusOne, setShowPlusOne] = useState(false);
+
+  useEffect(() => {
+    const saved = Number(localStorage.getItem("belief-count") || 0);
+    if (!isNaN(saved)) setCount(saved);
+  }, []);
+
+  const handleBelieveClick = () => {
+    const newCount = count + 1;
+    setCount(newCount);
+    localStorage.setItem("belief-count", String(newCount));
+    setShowPlusOne(true);
+    setTimeout(() => setShowPlusOne(false), 800);
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-sky-50 flex flex-col items-center justify-center px-4 py-8 md:py-16 text-center relative overflow-hidden">
@@ -96,6 +112,20 @@ const Home: FC = () => {
             >
               {t("joinDescription")}
             </p>
+          </div>
+          <div className="pt-4 flex justify-center">
+            <div className="relative">
+              <Button onClick={handleBelieveClick}>
+                {language === "zh"
+                  ? `信仰我们 (${count})`
+                  : `Believe in Us (${count})`}
+              </Button>
+              {showPlusOne && (
+                <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-red-500 pointer-events-none animate-rise-fade">
+                  +1
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
