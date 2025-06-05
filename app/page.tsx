@@ -5,23 +5,48 @@ import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { FC, useState, useEffect } from "react";
 
+const API_URL = "https://api.liangtao.cc/sleepism/belief";
+
 const Home: FC = () => {
   const { t, language } = useLanguage();
-  const [count, setCount] = useState(0);
+  const [beliefCount, setBeliefCount] = useState<number>(0);
   const [showPlusOne, setShowPlusOne] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // 获取当前信仰人数
+  const fetchBeliefCount = async () => {
+    try {
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error("Failed to fetch");
+      const data = await res.json();
+      setBeliefCount(data.belief ?? 0);
+    } catch (e) {
+      // 可选：处理错误
+    }
+  };
+
+  // 增加信仰人数
+  const incrementBeliefCount = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (!res.ok) throw new Error("Failed to increment");
+      setShowPlusOne(true);
+      setTimeout(() => setShowPlusOne(false), 800);
+      await fetchBeliefCount();
+    } catch (e) {
+      // 可选：处理错误
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const saved = Number(localStorage.getItem("belief-count") || 0);
-    if (!isNaN(saved)) setCount(saved);
+    fetchBeliefCount();
   }, []);
-
-  const handleBelieveClick = () => {
-    const newCount = count + 1;
-    setCount(newCount);
-    localStorage.setItem("belief-count", String(newCount));
-    setShowPlusOne(true);
-    setTimeout(() => setShowPlusOne(false), 800);
-  };
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-sky-50 flex flex-col items-center justify-center px-4 py-8 md:py-16 text-center relative overflow-hidden">
@@ -115,10 +140,10 @@ const Home: FC = () => {
           </div>
           <div className="pt-4 flex justify-center">
             <div className="relative">
-              <Button onClick={handleBelieveClick}>
+              <Button onClick={incrementBeliefCount} disabled={loading}>
                 {language === "zh"
-                  ? `信仰我们 (${count})`
-                  : `Believe in Us (${count})`}
+                  ? `信仰我们 (${beliefCount})`
+                  : `Believe in Us (${beliefCount})`}
               </Button>
               {showPlusOne && (
                 <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-red-500 pointer-events-none animate-rise-fade">
