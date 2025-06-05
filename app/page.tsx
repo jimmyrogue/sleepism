@@ -32,6 +32,9 @@ const Home: FC = () => {
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ip: "127.0.0.1",
+        }),
       });
       if (!res.ok) throw new Error("Failed to increment");
       setShowPlusOne(true);
