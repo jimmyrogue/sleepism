@@ -36,13 +36,15 @@ const Home: FC = () => {
     setBeliefCount((prev) => prev + 1);
     const id = uuidv4();
     function randomBezierPath() {
-      // 起点(0,0)，终点(x3, y3)，x3为正数，整体往右上
-      const x1 = 20 + Math.random() * 80;   // 20~100 px
-      const y1 = -40 - Math.random() * 40;  // -40 ~ -80 px
-      const x2 = 40 + Math.random() * 80;   // 40~120 px
-      const y2 = -80 - Math.random() * 40;  // -80 ~ -120 px
-      const x3 = 60 + Math.random() * 60;   // 60~120 px
-      const y3 = -120 - Math.random() * 40; // -120 ~ -160 px
+      // 移动端参数缩小
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+      const scale = isMobile ? 0.5 : 1;
+      const x1 = (20 + Math.random() * 80) * scale;
+      const y1 = (-40 - Math.random() * 40) * scale;
+      const x2 = (40 + Math.random() * 80) * scale;
+      const y2 = (-80 - Math.random() * 40) * scale;
+      const x3 = (60 + Math.random() * 60) * scale;
+      const y3 = (-120 - Math.random() * 40) * scale;
       return `M0,0 C${x1},${y1} ${x2},${y2} ${x3},${y3}`;
     }
     const path = randomBezierPath();
@@ -119,7 +121,7 @@ const Home: FC = () => {
           <div className="flex justify-center mt-6 relative">
             <Button
               size="lg"
-              className="text-2xl px-10 py-6 rounded-full shadow-xl bg-gradient-to-r from-sky-400 to-purple-500 text-white font-bold tracking-wider transition-transform duration-200 hover:scale-105 hover:shadow-2xl focus:ring-4 focus:ring-purple-200"
+              className="text-lg md:text-2xl px-6 md:px-10 py-3 md:py-6 rounded-full shadow-xl bg-gradient-to-r from-sky-400 to-purple-500 text-white font-bold tracking-wider transition-transform duration-200 hover:scale-105 hover:shadow-2xl focus:ring-4 focus:ring-purple-200"
               onClick={incrementBeliefCount}
             >
               {language === "zh"
