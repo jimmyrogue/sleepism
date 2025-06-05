@@ -4,14 +4,18 @@ import { LanguageToggle } from "@/components/language-toggle";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { FC, useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const API_URL = "https://api.liangtao.cc/sleepism/belief";
+
+type PlusOne = { id: string; path: string };
 
 const Home: FC = () => {
   const { t, language } = useLanguage();
   const [beliefCount, setBeliefCount] = useState<number>(0);
   const [showPlusOne, setShowPlusOne] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [plusOnes, setPlusOnes] = useState<PlusOne[]>([]);
 
   // 获取当前信仰人数
   const fetchBeliefCount = async () => {
@@ -27,21 +31,37 @@ const Home: FC = () => {
 
   // 增加信仰人数
   const incrementBeliefCount = async () => {
+    if (loading) return;
     setLoading(true);
+    setBeliefCount((prev) => prev + 1);
+    const id = uuidv4();
+    function randomBezierPath() {
+      // 起点(0,0)，终点(x3, y3)，x3为正数，整体往右上
+      const x1 = 20 + Math.random() * 80;   // 20~100 px
+      const y1 = -40 - Math.random() * 40;  // -40 ~ -80 px
+      const x2 = 40 + Math.random() * 80;   // 40~120 px
+      const y2 = -80 - Math.random() * 40;  // -80 ~ -120 px
+      const x3 = 60 + Math.random() * 60;   // 60~120 px
+      const y3 = -120 - Math.random() * 40; // -120 ~ -160 px
+      return `M0,0 C${x1},${y1} ${x2},${y2} ${x3},${y3}`;
+    }
+    const path = randomBezierPath();
+    setPlusOnes((prev) => [...prev, { id, path }]);
+    setTimeout(() => {
+      setPlusOnes((prev) => prev.filter((item) => item.id !== id));
+    }, 800);
     try {
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ip: "127.0.0.1",
-        }),
+        body: JSON.stringify({ ip: "127.0.0.1" }),
       });
       if (!res.ok) throw new Error("Failed to increment");
-      setShowPlusOne(true);
-      setTimeout(() => setShowPlusOne(false), 800);
-      await fetchBeliefCount();
+      // 不再 fetchBeliefCount，前端已加
     } catch (e) {
-      // 可选：处理错误
+      // 回滚数字
+      setBeliefCount((prev) => (prev > 0 ? prev - 1 : 0));
+      // 可选：弹出错误提示
     } finally {
       setLoading(false);
     }
@@ -95,6 +115,30 @@ const Home: FC = () => {
               )}
             </h1>
           </div>
+          {/* 醒目的信仰按钮 */}
+          <div className="flex justify-center mt-6 relative">
+            <Button
+              size="lg"
+              className="text-2xl px-10 py-6 rounded-full shadow-xl bg-gradient-to-r from-sky-400 to-purple-500 text-white font-bold tracking-wider transition-transform duration-200 hover:scale-105 hover:shadow-2xl focus:ring-4 focus:ring-purple-200"
+              onClick={incrementBeliefCount}
+            >
+              {language === "zh"
+                ? `信仰我们 (${beliefCount})`
+                : `Believe in Us (${beliefCount})`}
+            </Button>
+            {plusOnes.map((item) => (
+              <span
+                key={item.id}
+                style={{
+                  offsetPath: `path('${item.path}')`,
+                  WebkitOffsetPath: `path('${item.path}')`
+                } as React.CSSProperties}
+                className="absolute -top-4 left-1/2 -translate-x-1/2 text-4xl font-extrabold bg-gradient-to-r from-pink-400 to-purple-500 text-transparent bg-clip-text drop-shadow-lg animate-curve-rise"
+              >
+                +z
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Mission Statement */}
@@ -140,20 +184,6 @@ const Home: FC = () => {
             >
               {t("joinDescription")}
             </p>
-          </div>
-          <div className="pt-4 flex justify-center">
-            <div className="relative">
-              <Button onClick={incrementBeliefCount} disabled={loading}>
-                {language === "zh"
-                  ? `信仰我们 (${beliefCount})`
-                  : `Believe in Us (${beliefCount})`}
-              </Button>
-              {showPlusOne && (
-                <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-red-500 pointer-events-none animate-rise-fade">
-                  +1
-                </span>
-              )}
-            </div>
           </div>
         </div>
 
