@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { FC, useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-const API_URL = "https://api.liangtao.cc/sleepism/belief";
+const API_URL = "https://www.liangtao.cc/api/belief";
 
 type PlusOne = { id: string; path: string };
 
