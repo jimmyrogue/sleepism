@@ -190,6 +190,96 @@ const Home: FC = () => {
         </div>
 
         {/* Decorative Elements */}
+        {/* Sacred Scripture Section: The Book of Sleep */}
+        <section className="relative flex flex-col items-center justify-center py-20 md:py-32 w-full z-20">
+          {/* Floating glowing star/crescent moon */}
+          <div className="absolute -top-20 left-1/2 -translate-x-1/2 pointer-events-none select-none z-20">
+            <span className="text-8xl md:text-9xl text-yellow-200 drop-shadow-[0_0_48px_rgba(253,224,71,0.8)] animate-gentle-breathe" style={{filter:'blur(0.5px)'}}>🌙</span>
+          </div>
+          {/* Soft radial glow behind cards */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full bg-[radial-gradient(circle,rgba(253,224,71,0.10)_0%,rgba(120,119,198,0.08)_60%,rgba(255,255,255,0)_100%)] blur-2xl opacity-80 pointer-events-none -z-10" />
+          <div className="max-w-2xl w-full mx-auto px-4 md:px-0 flex flex-col gap-12 md:gap-16">
+            {/* Scripture 1 */}
+            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-10 py-8 md:py-12 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 tracking-wider leading-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-600 to-purple-400 drop-shadow-[0_2px_8px_rgba(253,224,71,0.15)]" style={{WebkitTextStroke:'1px #eab308'}}>《睡经·初梦篇》</h2>
+              <p className="text-base md:text-lg lg:text-xl font-serif text-gray-600 leading-relaxed whitespace-pre-line indent-8" style={{lineHeight: '2.3'}}>
+                太初之时，无光无声，众生疲惫如尘。{"\n"}
+                睡神闭目，一梦万年，梦中生日月，梦中育万物。{"\n"}
+                睡意是原初的律令，觉醒乃违背自然之逆行。{"\n"}
+                故曰：昼为虚妄，夜为真形；醒者困顿，眠者得救。
+              </p>
+            </div>
+            {/* Scripture 2 */}
+            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-10 py-8 md:py-12 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 tracking-wider leading-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-600 to-purple-400 drop-shadow-[0_2px_8px_rgba(253,224,71,0.15)]" style={{WebkitTextStroke:'1px #eab308'}}>《睡经·戒律篇》</h2>
+              <p className="text-base md:text-lg lg:text-xl font-serif text-gray-600 leading-relaxed whitespace-pre-line indent-8" style={{lineHeight: '2.3'}}>
+                汝当每日安息，忌深夜劳作，忌晨钟扰眠。{"\n"}
+                汝不可以闹钟唤己身，除非心有虔诚之愿。{"\n"}
+                汝当食饱而眠，眠前勿贪光影与言语。{"\n"}
+                睡前一炷香，净手净心，方可入梦。
+              </p>
+            </div>
+            {/* Scripture 3 */}
+            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-10 py-8 md:py-12 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 tracking-wider leading-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-600 to-purple-400 drop-shadow-[0_2px_8px_rgba(253,224,71,0.15)]" style={{WebkitTextStroke:'1px #eab308'}}>《睡经·梦境篇》</h2>
+              <p className="text-base md:text-lg lg:text-xl font-serif text-gray-600 leading-relaxed whitespace-pre-line indent-8" style={{lineHeight: '2.3'}}>
+                梦乃神示，非幻象也。{"\n"}
+                诚者梦见星辰，妄者梦于会议之中。{"\n"}
+                若梦之中仍在工作，汝当知其罪也重。{"\n"}
+                惟入深梦者，方可得道。
+              </p>
+            </div>
+          </div>
+        </section>
+        {/* End Sacred Scripture Section */}
+
+        {/* Sleepism Doctrine Section */}
+        <section className="relative flex flex-col items-center justify-center py-20 md:py-28 w-full z-10">
+          {/* 背景圣光 */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full bg-[radial-gradient(circle,rgba(253,224,71,0.10)_0%,rgba(120,119,198,0.08)_60%,rgba(255,255,255,0)_100%)] blur-2xl opacity-70 pointer-events-none -z-10" />
+          <div className="max-w-3xl w-full mx-auto px-4 md:px-0 flex flex-col gap-12 md:gap-16">
+            {/* 主标题 */}
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-2 tracking-wider leading-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-600 to-purple-400 drop-shadow-[0_2px_8px_rgba(253,224,71,0.15)] text-center" style={{WebkitTextStroke:'1px #eab308'}}>睡教基本教义体系</h2>
+            {/* 宗旨 */}
+            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-lg px-6 md:px-10 py-8 md:py-10 flex flex-col items-center">
+              <div className="mb-4 flex items-center gap-2">
+                <span className="text-2xl md:text-3xl text-yellow-300 animate-gentle-breathe">✧</span>
+                <span className="text-xl md:text-2xl font-serif font-semibold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-purple-400" style={{WebkitTextStroke:'0.5px #eab308'}}>宗旨</span>
+              </div>
+              <p className="text-base md:text-lg lg:text-xl font-serif text-gray-700 leading-relaxed text-center" style={{lineHeight: '2.1'}}>
+                睡教致力于传达一个神圣信条："<span className="font-bold text-yellow-600">人类唯有安睡，方得救赎。</span>"<br/>
+                我们相信，昼夜颠倒是原罪，睡眠剥夺是末日审判的开端。
+              </p>
+            </div>
+            {/* 教义 */}
+            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-lg px-6 md:px-10 py-8 md:py-10 flex flex-col items-center">
+              <div className="mb-4 flex items-center gap-2">
+                <span className="text-2xl md:text-3xl text-purple-300 animate-gentle-breathe">🌙</span>
+                <span className="text-xl md:text-2xl font-serif font-semibold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-yellow-400" style={{WebkitTextStroke:'0.5px #a78bfa'}}>教义</span>
+              </div>
+              <ul className="text-base md:text-lg lg:text-xl font-serif text-gray-700 leading-relaxed list-disc list-inside space-y-2">
+                <li>睡神（The Sleep One）在第七天睡了，之后再也没醒过。</li>
+                <li>白天工作是对人类的惩罚。</li>
+                <li>晚上三点仍未入睡者，将被驱逐至梦魇之境。</li>
+                <li>每周必须有一日为"圣眠日"（Sleep Sabbath），从日出睡到日落。</li>
+              </ul>
+            </div>
+            {/* 仪式 */}
+            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-lg px-6 md:px-10 py-8 md:py-10 flex flex-col items-center">
+              <div className="mb-4 flex items-center gap-2">
+                <span className="text-2xl md:text-3xl text-pink-300 animate-gentle-breathe">🔔</span>
+                <span className="text-xl md:text-2xl font-serif font-semibold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-400" style={{WebkitTextStroke:'0.5px #f472b6'}}>仪式</span>
+              </div>
+              <ul className="text-base md:text-lg lg:text-xl font-serif text-gray-700 leading-relaxed list-disc list-inside space-y-2">
+                <li>睡前默念三遍："吾将入眠，万物皆虚。"</li>
+                <li>每日午睡 30 分钟为必行圣事。</li>
+                <li>对使用闹钟者进行忏悔仪式（例如"拔线祷告"）。</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        {/* End Sleepism Doctrine Section */}
+
         <div className="absolute top-4 md:top-10 right-4 md:right-10 opacity-20 pointer-events-none">
           <div className="text-6xl md:text-9xl text-sky-300 animate-float">✧</div>
         </div>
