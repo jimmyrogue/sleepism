@@ -11,7 +11,7 @@ const API_URL = "https://www.liangtao.cc/api/belief";
 type PlusOne = { id: string; path: string };
 
 const Home: FC = () => {
-  const { t, language } = useLanguage();
+  const { t, language, tList } = useLanguage();
   const [beliefCount, setBeliefCount] = useState<number>(0);
   const [showPlusOne, setShowPlusOne] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -86,7 +86,7 @@ const Home: FC = () => {
       <LanguageToggle className="absolute top-4 right-4 md:top-8 md:right-8 z-10" />
 
       <div className="w-full max-w-4xl mx-auto space-y-12 md:space-y-16 animate-fade-in relative z-10">
-        {/* Logo/Wordmark */}
+        {/* Logo/Wordmark + 信仰按钮 */}
         <div className="space-y-4 md:space-y-6">
           <div className="flex flex-col items-center justify-center gap-2 md:gap-3">
             <div className="transform hover:scale-105 transition-transform duration-300">
@@ -117,11 +117,11 @@ const Home: FC = () => {
               )}
             </h1>
           </div>
-          {/* 醒目的信仰按钮 */}
           <div className="flex justify-center mt-6 relative">
             <Button
               size="lg"
-              className="text-lg md:text-2xl px-6 md:px-10 py-3 md:py-6 rounded-full shadow-xl bg-gradient-to-r from-sky-400 to-purple-500 text-white font-bold tracking-wider transition-transform duration-200 hover:scale-105 hover:shadow-2xl focus:ring-4 focus:ring-purple-200"
+              className="text-2xl md:text-4xl lg:text-5xl px-10 md:px-16 lg:px-24 py-5 md:py-8 lg:py-10 rounded-full shadow-2xl bg-gradient-to-r from-sky-400 to-purple-500 text-white font-extrabold tracking-widest transition-transform duration-200 hover:scale-110 hover:shadow-2xl focus:ring-4 focus:ring-purple-200 border-4 border-white/60"
+              style={{ minWidth: 'min(90vw, 420px)', letterSpacing: '0.08em', lineHeight: 1.2 }}
               onClick={incrementBeliefCount}
             >
               {language === "zh"
@@ -143,29 +143,52 @@ const Home: FC = () => {
           </div>
         </div>
 
-        {/* Mission Statement */}
-        <div className="pt-2 md:pt-4">
-          <h2
-            className={`text-xl md:text-3xl lg:text-4xl font-light text-gray-600 tracking-wider ${
-              language === "zh" ? "font-normal" : ""
-            }`}
-          >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-purple-600">
-              {t("mission")}
-            </span>
-          </h2>
-        </div>
+        {/* Mission Statement + Belief Paragraph */}
+        <section className="relative flex flex-col items-center justify-center py-16 md:py-28 w-full z-10">
+          {/* Hero Card Like Scripture */}
+          <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-12 py-10 md:py-16 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80 max-w-2xl w-full animate-fade-in">
+            {/* Hero decorative moon/star */}
+            <div className="absolute -top-24 left-1/2 -translate-x-1/2 pointer-events-none select-none z-10">
+              <span className="text-7xl md:text-8xl lg:text-9xl text-yellow-200 drop-shadow-[0_0_48px_rgba(253,224,71,0.7)] animate-gentle-breathe" style={{filter:'blur(0.5px)'}}>🌙</span>
+            </div>
+            <div className="w-full flex flex-col items-center justify-center gap-8">
+              <h2
+                className={`text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-500 via-purple-500 to-pink-500 drop-shadow-lg animate-fade-in ${language === 'zh' ? 'font-chinese' : 'font-serif'}`}
+                style={{ WebkitTextStroke: '1.5px #7dd3fc', letterSpacing: '0.04em', fontFamily: language === 'zh' ? 'var(--font-noto-sans-sc)' : 'serif' }}
+              >
+                {t("mission")}
+              </h2>
+              <div className="max-w-2xl w-full mx-auto px-4 md:px-0">
+                <p className={`text-lg md:text-2xl lg:text-3xl font-medium md:font-semibold text-gray-700 leading-relaxed md:leading-loose text-center px-2 md:px-4 mb-2 md:mb-4 animate-fade-in ${language === 'zh' ? 'font-chinese' : 'font-serif'}`}
+                  style={{lineHeight:'2.1', fontFamily: language === 'zh' ? 'var(--font-noto-sans-sc)' : 'serif'}}>
+                  {t("belief")}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        {/* Belief Paragraph */}
-        <div className="max-w-xl mx-auto px-4 md:px-0">
-          <p
-            className={`text-base md:text-lg lg:text-xl text-gray-500 font-light leading-relaxed ${
-              language === "zh" ? "font-normal leading-loose" : ""
-            }`}
-          >
-            {t("belief")}
-          </p>
-        </div>
+        {/* Secular Revelation Section */}
+        <section className="relative flex flex-col items-center justify-center py-20 md:py-28 w-full z-10">
+          {/* Background glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full bg-[radial-gradient(circle,rgba(253,224,71,0.08)_0%,rgba(120,119,198,0.06)_60%,rgba(255,255,255,0)_100%)] blur-2xl opacity-60 pointer-events-none -z-10" />
+          <div className="max-w-3xl w-full mx-auto px-4 md:px-0 flex flex-col gap-10 md:gap-16">
+            <div className="relative bg-white/60 backdrop-blur-lg border border-gray-100 rounded-3xl shadow-xl px-6 md:px-12 py-10 md:py-16 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80 animate-fade-in">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold tracking-wider leading-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-500 via-purple-500 to-pink-500 drop-shadow text-center" style={{ WebkitTextStroke: '1px #7dd3fc' }}>
+                {t("secularRevelationTitle")}
+              </h2>
+              <p className="text-base md:text-lg lg:text-xl font-serif text-gray-700 leading-relaxed whitespace-pre-line indent-8 text-center mt-6" style={{ lineHeight: '2.1' }}>
+                {t("secularRevelation1")} {"\n"}
+                {t("secularRevelation2")} {"\n"}
+                {t("secularRevelation3")} {"\n"}
+                {t("secularRevelation4")} {"\n\n"}
+                {t("secularRevelation5")} {"\n"}
+                {t("secularRevelation6")} {"\n\n"}
+                {t("secularRevelation7")}
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* How to Join Us */}
         <div className="pt-2 md:pt-4 space-y-4 md:space-y-6">
@@ -189,7 +212,6 @@ const Home: FC = () => {
           </div>
         </div>
 
-        {/* Decorative Elements */}
         {/* Sacred Scripture Section: The Book of Sleep */}
         <section className="relative flex flex-col items-center justify-center py-20 md:py-32 w-full z-20">
           {/* Floating glowing star/crescent moon */}
@@ -200,38 +222,28 @@ const Home: FC = () => {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full bg-[radial-gradient(circle,rgba(253,224,71,0.10)_0%,rgba(120,119,198,0.08)_60%,rgba(255,255,255,0)_100%)] blur-2xl opacity-80 pointer-events-none -z-10" />
           <div className="max-w-2xl w-full mx-auto px-4 md:px-0 flex flex-col gap-12 md:gap-16">
             {/* Scripture 1 */}
-            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-10 py-8 md:py-12 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80">
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 tracking-wider leading-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-600 to-purple-400 drop-shadow-[0_2px_8px_rgba(253,224,71,0.15)]" style={{WebkitTextStroke:'1px #eab308'}}>《睡经·初梦篇》</h2>
+            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-12 py-10 md:py-16 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80 animate-fade-in">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 tracking-wider leading-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-600 to-purple-400 drop-shadow-[0_2px_8px_rgba(253,224,71,0.15)]" style={{WebkitTextStroke:'1px #eab308'}}>{t("scripture1Title")}</h2>
               <p className="text-base md:text-lg lg:text-xl font-serif text-gray-600 leading-relaxed whitespace-pre-line indent-8" style={{lineHeight: '2.3'}}>
-                太初之时，无光无声，众生疲惫如尘。{"\n"}
-                睡神闭目，一梦万年，梦中生日月，梦中育万物。{"\n"}
-                睡意是原初的律令，觉醒乃违背自然之逆行。{"\n"}
-                故曰：昼为虚妄，夜为真形；醒者困顿，眠者得救。
+                {t("scripture1")}
               </p>
             </div>
             {/* Scripture 2 */}
-            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-10 py-8 md:py-12 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80">
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 tracking-wider leading-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-600 to-purple-400 drop-shadow-[0_2px_8px_rgba(253,224,71,0.15)]" style={{WebkitTextStroke:'1px #eab308'}}>《睡经·戒律篇》</h2>
+            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-12 py-10 md:py-16 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80 animate-fade-in">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 tracking-wider leading-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-600 to-purple-400 drop-shadow-[0_2px_8px_rgba(253,224,71,0.15)]" style={{WebkitTextStroke:'1px #eab308'}}>{t("scripture2Title")}</h2>
               <p className="text-base md:text-lg lg:text-xl font-serif text-gray-600 leading-relaxed whitespace-pre-line indent-8" style={{lineHeight: '2.3'}}>
-                汝当每日安息，忌深夜劳作，忌晨钟扰眠。{"\n"}
-                汝不可以闹钟唤己身，除非心有虔诚之愿。{"\n"}
-                汝当食饱而眠，眠前勿贪光影与言语。{"\n"}
-                睡前一炷香，净手净心，方可入梦。
+                {t("scripture2")}
               </p>
             </div>
             {/* Scripture 3 */}
-            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-10 py-8 md:py-12 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80">
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 tracking-wider leading-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-600 to-purple-400 drop-shadow-[0_2px_8px_rgba(253,224,71,0.15)]" style={{WebkitTextStroke:'1px #eab308'}}>《睡经·梦境篇》</h2>
+            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-12 py-10 md:py-16 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80 animate-fade-in">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold mb-6 tracking-wider leading-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-600 to-purple-400 drop-shadow-[0_2px_8px_rgba(253,224,71,0.15)]" style={{WebkitTextStroke:'1px #eab308'}}>{t("scripture3Title")}</h2>
               <p className="text-base md:text-lg lg:text-xl font-serif text-gray-600 leading-relaxed whitespace-pre-line indent-8" style={{lineHeight: '2.3'}}>
-                梦乃神示，非幻象也。{"\n"}
-                诚者梦见星辰，妄者梦于会议之中。{"\n"}
-                若梦之中仍在工作，汝当知其罪也重。{"\n"}
-                惟入深梦者，方可得道。
+                {t("scripture3")}
               </p>
             </div>
           </div>
         </section>
-        {/* End Sacred Scripture Section */}
 
         {/* Sleepism Doctrine Section */}
         <section className="relative flex flex-col items-center justify-center py-20 md:py-28 w-full z-10">
@@ -239,46 +251,43 @@ const Home: FC = () => {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full bg-[radial-gradient(circle,rgba(253,224,71,0.10)_0%,rgba(120,119,198,0.08)_60%,rgba(255,255,255,0)_100%)] blur-2xl opacity-70 pointer-events-none -z-10" />
           <div className="max-w-3xl w-full mx-auto px-4 md:px-0 flex flex-col gap-12 md:gap-16">
             {/* 主标题 */}
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-2 tracking-wider leading-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-600 to-purple-400 drop-shadow-[0_2px_8px_rgba(253,224,71,0.15)] text-center" style={{WebkitTextStroke:'1px #eab308'}}>睡教基本教义体系</h2>
+            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-12 py-10 md:py-16 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80 animate-fade-in mb-2">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold tracking-wider leading-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-600 to-purple-400 drop-shadow-[0_2px_8px_rgba(253,224,71,0.15)] text-center" style={{WebkitTextStroke:'1px #eab308'}}>{t("doctrineTitle")}</h2>
+            </div>
             {/* 宗旨 */}
-            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-lg px-6 md:px-10 py-8 md:py-10 flex flex-col items-center">
+            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-12 py-10 md:py-16 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80 animate-fade-in mb-2">
               <div className="mb-4 flex items-center gap-2">
                 <span className="text-2xl md:text-3xl text-yellow-300 animate-gentle-breathe">✧</span>
-                <span className="text-xl md:text-2xl font-serif font-semibold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-purple-400" style={{WebkitTextStroke:'0.5px #eab308'}}>宗旨</span>
+                <span className="text-xl md:text-2xl font-serif font-semibold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-purple-400" style={{WebkitTextStroke:'0.5px #eab308'}}>{t("doctrinePurpose")}</span>
               </div>
-              <p className="text-base md:text-lg lg:text-xl font-serif text-gray-700 leading-relaxed text-center" style={{lineHeight: '2.1'}}>
-                睡教致力于传达一个神圣信条："<span className="font-bold text-yellow-600">人类唯有安睡，方得救赎。</span>"<br/>
-                我们相信，昼夜颠倒是原罪，睡眠剥夺是末日审判的开端。
-              </p>
+              <p className="text-base md:text-lg lg:text-xl font-serif text-gray-700 leading-relaxed text-center" style={{lineHeight: '2.1'}} dangerouslySetInnerHTML={{__html: t("doctrinePurposeContent")}} />
             </div>
             {/* 教义 */}
-            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-lg px-6 md:px-10 py-8 md:py-10 flex flex-col items-center">
+            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-12 py-10 md:py-16 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80 animate-fade-in mb-2">
               <div className="mb-4 flex items-center gap-2">
                 <span className="text-2xl md:text-3xl text-purple-300 animate-gentle-breathe">🌙</span>
-                <span className="text-xl md:text-2xl font-serif font-semibold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-yellow-400" style={{WebkitTextStroke:'0.5px #a78bfa'}}>教义</span>
+                <span className="text-xl md:text-2xl font-serif font-semibold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-yellow-400" style={{WebkitTextStroke:'0.5px #a78bfa'}}>{t("doctrineDogma")}</span>
               </div>
               <ul className="text-base md:text-lg lg:text-xl font-serif text-gray-700 leading-relaxed list-disc list-inside space-y-2">
-                <li>睡神（The Sleep One）在第七天睡了，之后再也没醒过。</li>
-                <li>白天工作是对人类的惩罚。</li>
-                <li>晚上三点仍未入睡者，将被驱逐至梦魇之境。</li>
-                <li>每周必须有一日为"圣眠日"（Sleep Sabbath），从日出睡到日落。</li>
+                {tList && tList("doctrineDogmaList").map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
               </ul>
             </div>
             {/* 仪式 */}
-            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-lg px-6 md:px-10 py-8 md:py-10 flex flex-col items-center">
+            <div className="relative bg-white/60 backdrop-blur-lg border border-yellow-100 rounded-3xl shadow-xl px-6 md:px-12 py-10 md:py-16 flex flex-col items-center group transition-all duration-300 hover:shadow-2xl hover:bg-white/80 animate-fade-in mb-2">
               <div className="mb-4 flex items-center gap-2">
                 <span className="text-2xl md:text-3xl text-pink-300 animate-gentle-breathe">🔔</span>
-                <span className="text-xl md:text-2xl font-serif font-semibold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-400" style={{WebkitTextStroke:'0.5px #f472b6'}}>仪式</span>
+                <span className="text-xl md:text-2xl font-serif font-semibold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-400" style={{WebkitTextStroke:'0.5px #f472b6'}}>{t("doctrineRitual")}</span>
               </div>
               <ul className="text-base md:text-lg lg:text-xl font-serif text-gray-700 leading-relaxed list-disc list-inside space-y-2">
-                <li>睡前默念三遍："吾将入眠，万物皆虚。"</li>
-                <li>每日午睡 30 分钟为必行圣事。</li>
-                <li>对使用闹钟者进行忏悔仪式（例如"拔线祷告"）。</li>
+                {tList && tList("doctrineRitualList").map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
               </ul>
             </div>
           </div>
         </section>
-        {/* End Sleepism Doctrine Section */}
 
         <div className="absolute top-4 md:top-10 right-4 md:right-10 opacity-20 pointer-events-none">
           <div className="text-6xl md:text-9xl text-sky-300 animate-float">✧</div>
